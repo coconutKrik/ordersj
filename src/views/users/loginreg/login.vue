@@ -1,5 +1,7 @@
 <template>
-  <div><formlogin></formlogin></div>
+  <div class="bj">
+  <div class="form"><formlogin></formlogin></div>
+  </div>
 </template>
 <script>
 import formlogin from "./formlogin.vue";
@@ -10,7 +12,13 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-div {
-  width: 300px;
+.form{
+ 
+  width: 50%;
+  margin-top: 10%;
+  margin-left: 25%;
+}
+.bj{
+  background-image: url("./loginpic.jpeg");
 }
 </style>
