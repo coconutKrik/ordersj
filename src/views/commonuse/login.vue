@@ -1,6 +1,12 @@
 <template>
+  <div>
+  <div>
+  <a href="/shangjiareg">商家注册</a><br></br>
+  <a href="/userreg">用户注册</a>
+  </div>
   <div class="bj">
   <div class="form"><formlogin></formlogin></div>
+  </div>
   </div>
 </template>
 <script>
@@ -19,6 +25,6 @@ export default {
   margin-left: 25%;
 }
 .bj{
-  background-image: url("./loginpic.jpeg");
+  background-image: url("./../../assets/backpic.jpeg");
 }
 </style>
