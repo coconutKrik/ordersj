@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import login from '@/views/commonuse/login.vue'
 import userreg from '@/views/users/reg/register.vue'
 import shangjiarreg from '@/views/shangjia/reg/register.vue'
+import shangjiaindex from '@/views/shangjia/managepage/index.vue'
 
 Vue.use(VueRouter)
 
@@ -19,7 +20,35 @@ const routes = [
     path:'/shangjiareg',
     name:'shangjiareg',
     component:shangjiarreg,
-  },
+  },{
+    path:"/shangjiaindex",
+    name:"shangjiaindex",
+    component:shangjiaindex,
+    children:[
+      {
+        path:'dishesshow',
+        name:'dishesshow',
+        component:()=>import('@/views/shangjia/managepage/dishesshow.vue'),
+      },
+      {
+        path:'shangjiainfo',
+        name:'shangjiainfo',
+        component:()=>import('@/views/shangjia/managepage/shangjiainfo.vue'),
+        alias:'',
+      },
+      {
+        path:'dishesadd',
+        name:'dishesadd',
+        component:()=>import('@/views/shangjia/managepage/dishesadd.vue'),
+      },
+      {
+        path:'dishesdelete',
+        name:'dishesdelete',
+        component:()=>import('@/views/shangjia/managepage/dishesdelete.vue'),
+      },
+      
+    ],
+  }
 ]
 
 const router = new VueRouter({

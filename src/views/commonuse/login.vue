@@ -1,9 +1,5 @@
 <template>
   <div>
-  <div>
-  <a href="/shangjiareg">商家注册</a><br></br>
-  <a href="/userreg">用户注册</a>
-  </div>
   <div class="bj">
   <div class="form"><formlogin></formlogin></div>
   </div>
