@@ -78,7 +78,7 @@ export default {
           console.log(this.loginruleForm.characterchecked[0]);
           if(this.loginruleForm.characterchecked[0]=="普通用户"){
             this.axios.post(
-                "/login/userlogin/",
+                "/userlogin/",
                 {
                   username: this.loginruleForm.username,
                   password: this.loginruleForm.password,
@@ -97,7 +97,7 @@ export default {
                     response.data.username
                   );
                   this.$router.push({
-                    path: "/",
+                    path: "/user-index",
                   });
                 } else if (response.data.code === 400) {
                   this.error_message = "用户名或密码错误";
@@ -109,13 +109,47 @@ export default {
                 this.error_message = "服务器错误";
                 this.alert_error();
               });
-          } else {
+
+          } else{
+            this.axios.post(
+                "/shangjialogin/",
+                {
+                  username: this.loginruleForm.username,
+                  password: this.loginruleForm.password,
+                  remember: this.loginruleForm.remember,
+                },
+                {
+                  responseType: "json",
+                  // 发送请求的时候, 携带上cookie
+                }
+              )
+              .then((response) => {
+                if (response.data.code == 0) {
+                  // 跳转页面
+                  window.sessionStorage.setItem(
+                    "username",
+                    response.data.username
+                  );
+                  this.$router.push({
+                    path: "/shangjia-index",
+                  });
+                } else if (response.data.code === 400) {
+                  this.error_message = "用户名或密码错误";
+                  this.alert_error();
+                }
+              })
+              .catch((error) => {
+                console.log(error);
+                this.error_message = "服务器错误";
+                this.alert_error();
+              });
+
+          }
+        }else {
             console.log("error submit!!");
             return false;
-          }
-        }else{
-
         }
+        
       });
     },
     resetForm(formName) {
