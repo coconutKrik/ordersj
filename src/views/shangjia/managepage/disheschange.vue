@@ -3,6 +3,64 @@
       <div class="dishesshow">
         <h1 style="font-size: 16px; text-align: left">店内菜品</h1>
         <ul v-for="(dishes, i) in dishes_list" :key="i" style="list-style: none">
+            <div id="shade" class="c1 hide">
+                <div id="modal" class="c2 hide">
+                <el-form
+                :model="dataruleForm"
+                status-icon
+                :rules="rules"
+                ref="dataruleForm"
+                label-width="100px"
+                class="demo-dataruleForm"
+                >
+                <el-form-item label="菜品名" prop="dishesname">
+                    <el-input
+                    v-model="dataruleForm.dishesname"
+                    autocomplete="off"
+                    ></el-input>
+                </el-form-item>
+                <el-form-item label="菜品描述" prop="info">
+                    <el-input v-model="dataruleForm.info" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="菜品价格" prop="price">
+                    <el-input v-model="dataruleForm.price" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="菜品风味1" prop="taste1">
+                    <el-input v-model="dataruleForm.taste1" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="菜品风味2" prop="taste2">
+                    <el-input v-model="dataruleForm.taste2" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="菜品风味3" prop="taste3">
+                    <el-input v-model="dataruleForm.taste3" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="菜品图片" style="text-align: left">
+                    <el-upload
+                    class="upload-demo"
+                    action="http://127.0.0.1:8000/picupload/"
+                    :on-success="handlesuccess"
+                    multiple
+                    :limit="1"
+                    :file-list="fileList"
+                    >
+                    <el-button size="small" type="primary">点击上传</el-button>
+                    <div slot="tip" class="el-upload__tip">只能上传jpg/png文件</div>
+                    </el-upload>
+                </el-form-item>
+                <el-form-item>
+                    <el-button
+                    class="submit_button"
+                    type="primary"
+                    @click="submitForm('dataruleForm')"
+                    >修改菜品</el-button
+                    >
+                    <el-button class="reset_button" @click="resetForm('dataruleForm')"
+                    >重置输入</el-button
+                    >
+                </el-form-item>
+                </el-form>
+            </div>
+        </div>
           <li style="margin-bottom: 20px">
             <span class="dishespic">
               <el-image
@@ -83,65 +141,12 @@
     methods:{
         opendishesform(dishesid) {
             this.dataruleForm.dishesid=dishesid;
-            let htmlstr=`<el-form
-      :model="dataruleForm"
-      status-icon
-      :rules="rules"
-      ref="dataruleForm"
-      label-width="100px"
-      class="demo-dataruleForm"
-    >
-      <el-form-item label="菜品名" prop="dishesname">
-        <el-input
-          v-model="dataruleForm.dishesname"
-          autocomplete="off"
-        ></el-input>
-      </el-form-item>
-      <el-form-item label="菜品描述" prop="info">
-        <el-input v-model="dataruleForm.info" autocomplete="off"></el-input>
-      </el-form-item>
-      <el-form-item label="菜品价格" prop="price">
-        <el-input v-model="dataruleForm.price" autocomplete="off"></el-input>
-      </el-form-item>
-      <el-form-item label="菜品风味1" prop="taste1">
-        <el-input v-model="dataruleForm.taste1" autocomplete="off"></el-input>
-      </el-form-item>
-      <el-form-item label="菜品风味2" prop="taste2">
-        <el-input v-model="dataruleForm.taste2" autocomplete="off"></el-input>
-      </el-form-item>
-      <el-form-item label="菜品风味3" prop="taste3">
-        <el-input v-model="dataruleForm.taste3" autocomplete="off"></el-input>
-      </el-form-item>
-      <el-form-item label="菜品图片" style="text-align: left">
-        <el-upload
-          class="upload-demo"
-          action="http://127.0.0.1:8000/picupload/"
-          :on-success="handlesuccess"
-          multiple
-          :limit="1"
-          :file-list="fileList"
-        >
-          <el-button size="small" type="primary">点击上传</el-button>
-          <div slot="tip" class="el-upload__tip">只能上传jpg/png文件</div>
-        </el-upload>
-      </el-form-item>
-      <el-form-item>
-        <el-button
-          class="submit_button"
-          type="primary"
-          @click="submitForm('dataruleForm')"
-          >增加菜品</el-button
-        >
-        <el-button class="reset_button" @click="resetForm('dataruleForm')"
-          >重置输入</el-button
-        >
-      </el-form-item>
-    </el-form>`;
-            this.$alert(htmlstr, {
-            dangerouslyUseHTMLString: true
-            });
+            document.getElementById('shade').classList.remove('hide');
+            document.getElementById('modal').classList.remove('hide');
       },
       submitForm(formName) {
+        document.getElementById('shade').classList.add('hide');
+        document.getElementById('modal').classList.add('hide');
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.axios
@@ -225,5 +230,28 @@
   background-color: rgba(255, 255, 255, 0.8);
   border-color: rgba(255, 255, 255, 0.8);
 }
+.hide{
+    display: none;
+}
+.c1{
+    position: fixed;
+    top:0;
+    bottom: 0;
+    left:0;
+    right: 0;
+    background: rgba(0,0,0,.5);
+    z-index: 2;
+}
+.c2{
+    background-color: white;
+    position: fixed;
+    width: 500px;
+    height: 400px;
+    top:10%;
+    left: 30%;
+    z-index: 3;
+  
+}
+
   </style>
   
