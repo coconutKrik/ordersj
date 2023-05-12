@@ -5,7 +5,8 @@ module.exports = defineConfig({
   devServer: {
     allowedHosts: [
       'localhost',
-      '127.0.0.1'    
+      '127.0.0.1',
+      'www.ordering.site',   
     ],
     port:8080,
   },

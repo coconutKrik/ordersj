@@ -1,9 +1,15 @@
 <template>
-  <el-form :model="loginruleForm" status-icon :rules="rules" ref="loginruleForm" label-width="100px" class="demo-loginruleForm" >
-    
+  <el-form
+    :model="loginruleForm"
+    status-icon
+    :rules="rules"
+    ref="loginruleForm"
+    label-width="100px"
+    class="demo-loginruleForm"
+  >
     <h1 class="sys_name">点餐系统</h1>
     <h1 class="login_text">登录</h1>
-    
+
     <el-form-item label="用户名" prop="username">
       <el-input v-model="loginruleForm.username"></el-input>
     </el-form-item>
@@ -14,23 +20,34 @@
         autocomplete="off"
       ></el-input>
     </el-form-item>
-    <el-form-item label="您的角色" prop="" style="text-align: left;">
-      <el-checkbox-group :max="1" v-model="loginruleForm.characterchecked" :min="0">
-      <el-checkbox  label="商家用户" border style="margin-right: 2%;"></el-checkbox>
-      <el-checkbox  label="普通用户" border></el-checkbox>
+    <el-form-item label="您的角色" prop="" style="text-align: left">
+      <el-checkbox-group
+        :max="1"
+        v-model="loginruleForm.characterchecked"
+        :min="0"
+      >
+        <el-checkbox
+          label="商家用户"
+          border
+          style="margin-right: 2%"
+        ></el-checkbox>
+        <el-checkbox label="普通用户" border></el-checkbox>
       </el-checkbox-group>
     </el-form-item>
-    <el-form-item prop="remember" style="text-align: left;">
+    <el-form-item prop="remember" style="text-align: left">
       <div class="reglink">
         <el-checkbox v-model="loginruleForm.remember">保持登录</el-checkbox>
-        <a href="/shangjiareg" style="margin-left: 60%;margin-right: 5%;">商家注册</a>
+        <a href="/shangjiareg" style="margin-left: 60%; margin-right: 5%"
+          >商家注册</a
+        >
         <a href="/userreg">用户注册</a>
       </div>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click="submitForm('loginruleForm')">登录</el-button>
+      <el-button type="primary" @click="submitForm('loginruleForm')"
+        >登录</el-button
+      >
       <el-button @click="resetForm('loginruleForm')">重置</el-button>
-      
     </el-form-item>
   </el-form>
 </template>
@@ -56,13 +73,12 @@ export default {
     };
 
     return {
-      
       error_message: "",
       loginruleForm: {
         password: "",
         username: "",
         remember: false,
-        characterchecked:[],
+        characterchecked: [],
       },
       rules: {
         password: [
@@ -72,7 +88,7 @@ export default {
           { required: true, validator: checkusername, trigger: "blur" },
         ],
         remember: [{ required: true, type: "boolean" }],
-        characterchecked:[{ required: true, type: "list" }],
+        characterchecked: [{ required: true, type: "list" }],
       },
     };
   },
@@ -80,9 +96,9 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          
-          if(this.loginruleForm.characterchecked[0]=="普通用户"){
-            this.axios.post(
+          if (this.loginruleForm.characterchecked[0] == "普通用户") {
+            this.axios
+              .post(
                 "/userlogin/",
                 {
                   username: this.loginruleForm.username,
@@ -102,7 +118,7 @@ export default {
                     response.data.username
                   );
                   this.$router.push({
-                    path: "/user-index",
+                    path: "/userindex",
                   });
                 } else if (response.data.code === 400) {
                   this.error_message = "用户名或密码错误";
@@ -114,9 +130,9 @@ export default {
                 this.error_message = "服务器错误";
                 this.alert_error();
               });
-
-          } else{
-            this.axios.post(
+          } else {
+            this.axios
+              .post(
                 "/shangjialogin/",
                 {
                   username: this.loginruleForm.username,
@@ -136,7 +152,7 @@ export default {
                     response.data.username
                   );
                   this.$router.push({
-                    path: "/shangjia-index",
+                    path: "/shangjiaindex",
                   });
                 } else if (response.data.code === 400) {
                   this.error_message = "用户名或密码错误";
@@ -148,13 +164,11 @@ export default {
                 this.error_message = "服务器错误";
                 this.alert_error();
               });
-
           }
-        }else {
-            console.log("error submit!!");
-            return false;
+        } else {
+          console.log("error submit!!");
+          return false;
         }
-        
       });
     },
     resetForm(formName) {
@@ -171,7 +185,6 @@ export default {
 
 <style lang="less" scoped>
 div {
-  
   display: inline-block;
   width: 100%;
   height: auto;
@@ -184,11 +197,10 @@ div {
     width: 150px;
   }
 }
-h1{
+h1 {
   margin-left: 5%;
 }
-.sys_name{
-  
+.sys_name {
   font-weight: 700;
 }
 
@@ -203,34 +215,29 @@ h1{
   background-color: rgba(0, 0, 255, 0.5);
   border-color: rgba(0, 0, 255, 0.5);
   margin-right: 5%;
-  
 }
 .demo-loginruleForm {
-    padding-right: 5%;
-    position: relative;
-    margin: 0 auto;
-    overflow: hidden;
-    background-color: rgba(255, 255, 255, 0.9);
-    
-   
-    ::v-deep .el-form-item {
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      
-      border-radius: 5px;
- 
-    }
-    
+  padding-right: 5%;
+  position: relative;
+  margin: 0 auto;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.9);
+
+  ::v-deep .el-form-item {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    border-radius: 5px;
+  }
 }
-.reglink{
+.reglink {
   display: inline-block;
   width: 100%;
-  a{
+  a {
     text-align: center;
     text-decoration: none;
   }
 }
-/deep/.el-checkbox.is-bordered{
+/deep/.el-checkbox.is-bordered {
   border: 1px solid #000000;
 }
-
 </style>
