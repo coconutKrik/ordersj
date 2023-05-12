@@ -56,7 +56,7 @@
               </div>
             </template>
             <el-menu-item index="1-1"
-              ><a href="#" target="_self" @click="logout"
+              ><a href="#" target="_self" @click="logout()"
                 ><div>退出登录</div></a
               ></el-menu-item
             >
@@ -99,7 +99,27 @@ export default {
       this.shangjianame = window.sessionStorage.getItem("username");
     }
   },
-  methods: {},
+  methods: {
+    logout(){
+      let url='/shangjialogout';
+      this.axios.delete(url,{
+        shangjianame:this.shangjianame,
+      },{
+        responseType:'json',
+      })
+      .then(res=>{
+        if(res.data.code==0){
+      
+        }else{
+          console.log(res.data.errmsg);
+        }
+      })
+      .catch(err=>{
+        alert('服务器错误');
+        console.log(err);
+      })
+    }
+  },
 };
 </script>
 

@@ -114,6 +114,12 @@
                   @click="opendishesform(dishes.dishes_id, dishes.num)"
                   >修改</el-button
                 >
+                <el-button
+                  type="text"
+                  size="small"
+                  @click="deletedishes(dishes.dishes_id)"
+                  >删除</el-button
+                >
               </el-descriptions-item>
             </el-descriptions>
           </span>
@@ -172,6 +178,25 @@ export default {
       this.dataruleForm.price = this.dishes_list[num].price;
       document.getElementById("shade").classList.remove("hide");
       document.getElementById("modal").classList.remove("hide");
+    },
+    deletedishes(dishesid){
+        this.axios.delete('/goods/',{
+            dishes_id:dishesid,
+        },{
+            responseType:'json',
+        })
+        .then(res=>{
+            if(res.data.code==0){
+                alert('删除菜品成功');
+                this.$router.go(0);
+            }else{
+                console.log(res.data.errmsg);
+            }
+        })
+        .catch(err=>{
+            alert('服务器错误');
+            console.log(err);
+        })
     },
     submitForm(formName) {
       document.getElementById("shade").classList.add("hide");

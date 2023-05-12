@@ -45,7 +45,11 @@ const routes = [
         path:'disheschange',
         name:'disheschange',
         component:()=>import('@/views/shangjia/managepage/disheschange.vue'),
-      },
+      },{
+        path:"ordershow",
+        name:"ordershow",
+        component:()=>import("@/views/shangjia/managepage/ordershow.vue"),
+      }
       
     ],
   }
