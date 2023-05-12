@@ -111,7 +111,7 @@
                 <el-button
                   type="text"
                   size="small"
-                  @click="opendishesform(dishes.dishes_id)"
+                  @click="opendishesform(dishes.dishes_id, dishes.num)"
                   >修改</el-button
                 >
               </el-descriptions-item>
@@ -162,8 +162,14 @@ export default {
       });
   },
   methods: {
-    opendishesform(dishesid) {
+    opendishesform(dishesid, num) {
       this.dataruleForm.dishesid = dishesid;
+      this.dataruleForm.dishesname = this.dishes_list[num].dishesname;
+      this.dataruleForm.taste1 = this.dishes_list[num].taste1;
+      this.dataruleForm.taste2 = this.dishes_list[num].taste2;
+      this.dataruleForm.taste3 = this.dishes_list[num].taste3;
+      this.dataruleForm.info = this.dishes_list[num].info;
+      this.dataruleForm.price = this.dishes_list[num].price;
       document.getElementById("shade").classList.remove("hide");
       document.getElementById("modal").classList.remove("hide");
     },
