@@ -42,9 +42,9 @@ const routes = [
         component:()=>import('@/views/shangjia/managepage/dishesadd.vue'),
       },
       {
-        path:'dishesdelete',
-        name:'dishesdelete',
-        component:()=>import('@/views/shangjia/managepage/dishesdelete.vue'),
+        path:'disheschange',
+        name:'disheschange',
+        component:()=>import('@/views/shangjia/managepage/disheschange.vue'),
       },
       
     ],

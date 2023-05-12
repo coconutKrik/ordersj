@@ -1,13 +1,13 @@
 <template>
 <el-container style="height: 100%; border: 1px solid #eee">
   <el-aside width="15%" style="background-color: white">
-    <el-menu @select="handleSelect" class="el-menu-vertical-demo">
+    <el-menu class="el-menu-vertical-demo">
       <el-submenu index="1">
         <template slot="title"><i class="el-icon-s-shop"></i>菜品管理</template>
         
         <el-menu-item index="1-1"><a href="/shangjiaindex/dishesshow"><span >菜品浏览</span></a></el-menu-item>
         <el-menu-item index="1-2"><a href="/shangjiaindex/dishesadd" ><span >菜品增加</span></a></el-menu-item>
-        <el-menu-item index="1-3"><a href="/shangjiaindex/dishesdelete"><span>菜品删除</span></a></el-menu-item>
+        <el-menu-item index="1-3"><a href="/shangjiaindex/disheschange"><span>菜品修改</span></a></el-menu-item>
       </el-submenu>
       <el-submenu index="2">
         <template slot="title"><i class="el-icon-s-order"></i>订单管理</template>
@@ -20,7 +20,7 @@
     <el-header style="text-align: right; font-size: 12px">
         <el-menu
                 mode="horizontal"
-                :default-active=1
+                :default-active="1"
                 class="el-menu-demo"
                 style="background-color: #B3C0D1">
                 <el-menu-item ><a href="/shangjiaindex"><span style="width: 100%;height: 100%;">商家首页</span></a></el-menu-item>

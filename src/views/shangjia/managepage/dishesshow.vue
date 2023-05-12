@@ -2,8 +2,9 @@
  <div>
    <div class="dishesshow">
         <h1 style="font-size: 16px;text-align: left;">店内菜品</h1>
-        <ul v-for="(dishes,i) in dishes_list" :key="i">
-            <li>
+        <ul >
+            
+            <li v-for="(dishes,i) in dishes_list" :key="i">
                 <span class="dishespic">
                     <el-image
                     style="width: 100px; height: 100px"
@@ -11,7 +12,7 @@
                     fit="cover"></el-image>
                 </span>
                 <span class="infoshow">
-                    <el-descriptions class="margin-top" title="带边框列表" :column="3" :size="size" border>
+                    <el-descriptions :column="3">
                         <el-descriptions-item>
                             <template slot="label">
                                 菜品名
