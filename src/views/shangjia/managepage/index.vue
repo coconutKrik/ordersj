@@ -95,10 +95,8 @@ export default {
     };
   },
   mounted() {
-    this.shangjianame= document.cookie.match(new RegExp("(^| )" + 'username' + "=([^;]*)(;|$)"))[0];
-    if (this.shangjianame == "") {
-      this.shangjianame = window.sessionStorage.getItem("username");
-    }
+    this.shangjianame= document.cookie.match(new RegExp("(^| )" + 'username' + "=([^;]*)(;|$)"))[2];
+    
   },
   methods: {
     logout(){

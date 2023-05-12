@@ -113,10 +113,7 @@ export default {
               .then((response) => {
                 if (response.data.code == 0) {
                   // 跳转页面
-                  window.sessionStorage.setItem(
-                    "username",
-                    response.data.username
-                  );
+                  
                   this.$router.push({
                     path: "/userindex",
                   });
@@ -147,10 +144,7 @@ export default {
               .then((response) => {
                 if (response.data.code == 0) {
                   // 跳转页面
-                  window.sessionStorage.setItem(
-                    "username",
-                    response.data.username
-                  );
+                 
                   this.$router.push({
                     path: "/shangjiaindex",
                   });
