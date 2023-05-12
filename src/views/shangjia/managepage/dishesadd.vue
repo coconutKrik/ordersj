@@ -98,9 +98,7 @@ export default {
             .then((response) => {
               if (response.data.code == 0) {
                 alert("菜品添加成功");
-                this.$router.push({
-                  path: "shangjiaindex/dishesadd",
-                });
+                this.$router.go(0);
               } else {
                 this.error_message = response.data.errmsg;
                 this.alert_error();
