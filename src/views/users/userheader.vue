@@ -33,14 +33,16 @@
          
          <div class="infoshow">
             <el-menu-item index="4"  style="width: 100%;">
-               <a href="/orders" target="_self"><div>历史订单</div></a>
+               <i class="el-icon-goods"></i>
+               <a href="/orders" target="_self" style="display: inline-flex;"><div>历史订单</div></a>
             </el-menu-item>
          </div>
 
          <div class="infoshow" @onfocus="cartshow()"  tabindex="-1" @onblur="cartclose()">
             
             <el-menu-item index="3"  style="width: 100%;">
-               <a href="/cart" target="_self"><div>购物车</div></a>
+               <i class="el-icon-shopping-cart-1"></i>
+               <a href="/cart" target="_self" style="display: inline-flex;"><div>购物车</div></a>
                <!-- <ul class="cartshow hide" id="cartshow">
                <li>
                   <span class="dishespic" style="width: 50px;">菜品图片</span>
