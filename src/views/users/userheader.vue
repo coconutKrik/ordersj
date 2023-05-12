@@ -6,9 +6,10 @@
          </div>
          
          <div class="search_bar">
-            <el-menu-item index="3" >
-                  <div class="grid-content bg-purple">
+            <el-menu-item index="2"  style="width: 100%;">
+                  <div class="grid-content bg-purple" style="width: 100%;">
                      <el-input
+                        style="width: 100%;"
                         placeholder="请输入内容"
                         prefix-icon="el-icon-search"
                         v-model="search_data"
@@ -17,22 +18,51 @@
                   </div>
             </el-menu-item>
          </div>
-         <div class="right_header" v-show="reg">
-         <el-menu-item index="4" ><a href="/login" target="_self"><div>登录</div></a></el-menu-item>
-         </div>
-         <div class="right_header" v-show="login">
-         <el-menu-item index="4" ><a href="/reg" target="_self"><div>注册</div></a></el-menu-item>
-         </div>
+         
          <div class="right_header" v-show="reg_and_login">
-         <el-menu-item index="4" ><a href="/reg" target="_self"><div>注册</div></a></el-menu-item>
-         <el-menu-item index="5" ><a href="/login" target="_self"><div>登录</div></a></el-menu-item>
+         <el-menu-item index="5" ><a href="/userreg" target="_self"><div>注册</div></a></el-menu-item>
+         <el-menu-item index="6" ><a href="/" target="_self"><div>登录</div></a></el-menu-item>
          </div>
          <div class="right_header" v-show="logined" style="width: auto;">
-         <el-submenu index="4">
+         <el-submenu index="5">
             <template slot="title"><div><i class="el-icon-user-solid" style="display: inline-block;"></i><span style="display: inline-block;">{{ username }}</span></div></template>
-               <el-menu-item index="4-1"><a href="/usercenter" target="_self"><div>用户中心</div></a></el-menu-item>
-               <el-menu-item index="4-2"><a href="#" target="_self" @click='logout'><div>退出登录</div></a></el-menu-item>
+               <el-menu-item index="5-1"><a href="/usercenter" target="_self"><div>用户中心</div></a></el-menu-item>
+               <el-menu-item index="5-2"><a href="#" target="_self" @click='logout'><div>退出登录</div></a></el-menu-item>
          </el-submenu>
+         </div>
+         
+         <div class="infoshow">
+            <el-menu-item index="4"  style="width: 100%;">
+               <a href="/orders" target="_self"><div>历史订单</div></a>
+            </el-menu-item>
+         </div>
+
+         <div class="infoshow" @onfocus="cartshow()"  tabindex="-1" @onblur="cartclose()">
+            
+            <el-menu-item index="3"  style="width: 100%;">
+               <a href="/cart" target="_self"><div>购物车</div></a>
+               <!-- <ul class="cartshow hide" id="cartshow">
+               <li>
+                  <span class="dishespic" style="width: 50px;">菜品图片</span>
+                  <span>菜品名称</span>
+                  <span>菜品单价</span>
+                  <span>数量</span>
+               </li>
+               <li v-for="(dishes,i) in cart" :key="i">
+                  <span class="dishespic">
+                     <el-image
+                     style="width: 50px; height: 50px"
+                     :src="dishes.picurl"
+                     fit="cover"
+                     ></el-image>
+                  </span>
+                  <span>{{ dishes.dishesname }}</span>
+                  <span>{{ dishes.dishesprice }}</span>
+                  <span>{{ dishes.dishescount }}</span>
+               </li>
+             </ul> -->
+            </el-menu-item>
+            
          </div>
       </el-menu>
    <div class="line"></div>
@@ -48,11 +78,10 @@
            activeIndex: '0',
            activeIndex2: '0',
            search_data:"",
-           reg:false,
-           login:false,
            reg_and_login:false,
            logined:false,
            username:"",
+           cart:[]
          };
        },
        
@@ -61,6 +90,7 @@
          handleSelect(key, keyPath) {
            console.log(key, keyPath);
          },
+        
          logout(){
             this.axios.delete('/logout/',{
                responseType:'json',
@@ -106,59 +136,19 @@
        },
        created(){
          var pathname=window.location.pathname;
-         // console.log(pathname);
-         if(!window.sessionStorage.getItem('logined')){
-   
-            this.axios.get('/login/userlogin/',{
-            },{
-               responseType: 'json',
-            })
-            .then(res=>{
-               this.logined=res.data.logined;
-               if(this.logined){
-                  this.username=res.data.username;
-                  window.sessionStorage.setItem('username',res.data.username);
-                  window.sessionStorage.setItem('logined',true);
-                  if(pathname=="/reg"||pathname=='/login'){
-                     this.$router.push({
-                        path:"/",
-                     });
-                  }
-                  this.reg_and_login=false;
-   
-               }
-            })
-            .catch(err=>{
-               console.log(err);
-            })
-            
-            
-         }else{
+         if(document.cookie.match(new RegExp("(^| )" + 'username' + "=([^;]*)(;|$)"))!=undefined){
+            this.username=document.cookie.match(new RegExp("(^| )" + 'username' + "=([^;]*)(;|$)"))[2];
             this.logined=true;
-            this.username=window.sessionStorage.getItem('username');
-            if(pathname=="/reg"||pathname=='/login'){
+         }else{
+            this.reg_and_login=true;
+            if(pathname=='/search'){
+               alert("登录后可使用搜索功能")
                this.$router.push({
-                  path:"/",
-               });
+                  path:"/login"
+               })
             }
          }
-         if(!this.logined){
-            if (pathname=="/reg"||pathname=="/reg#"){
-               this.reg=true;
-            }
-            else if(pathname=='/login'||pathname=="/login#"){
-               this.login=true;
-            }
-            else{
-               this.reg_and_login=true;
-               if(pathname=='/search'){
-                  alert("登录后可使用搜索功能")
-                  this.$router.push({
-                     path:"/login"
-                  })
-               }
-            }
-         }
+         
       },
     }
    </script>
@@ -172,20 +162,40 @@
       
       .first{
          display: inline-flex;
-   
-      }
-      .second{
-         display: inline-flex;
+         float: left;
       }
       .search_bar{
+         width: 35%;
          display: inline-flex;
-         left:50% ;
+         float: left;
+         margin-left: 15%;
          
       }
       .right_header{
          display: flex;
          margin-right: 0px;
          float:right;
+      }
+      .hide{
+         display: none;
+      }
+      .infoshow{
+         display: inline-flex;
+         float: right;
+         width: 8%;
+         // .cartshow{
+         //    list-style: none;
+         //    margin-left: -80%;
+         //    padding-right: 30%;
+         //    position: absolute;
+         //    height: auto;
+         //    background-color: rgb(255, 212, 212);
+            
+         //    span{
+         //       padding: 5px;
+         //    }
+          
+         // }
       }
    /deep/.el-input__inner{
      border: 1px solid #737377;

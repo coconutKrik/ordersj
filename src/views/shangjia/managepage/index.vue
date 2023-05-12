@@ -95,9 +95,7 @@ export default {
     };
   },
   mounted() {
-    this.shangjianame = document.cookie.match(
-      new RegExp("(^| )" + "username" + "=([^;]*)(;|$)")
-    )[2];
+    this.shangjianame = document.cookie.match(new RegExp("(^| )" + "username" + "=([^;]*)(;|$)"))[2];
     
   },
   methods: {
