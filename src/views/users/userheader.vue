@@ -30,7 +30,7 @@
                         placeholder="请输入内容"
                         prefix-icon="el-icon-search"
                         v-model="search_data"
-                        @keyup.enter.native="search_news">
+                        @keyup.enter.native="search_dishes">
                      </el-input>
                   </div>
             </el-menu-item>
@@ -91,7 +91,7 @@
                   this.logined=false;
                   this.reg_and_login=true;
                   this.$router.push({
-                     path:'/',
+                     path:'/userindex',
                   });
                }
             })
@@ -100,7 +100,7 @@
                console.log(err);
             })
          },
-         search_news(){
+         search_dishes(){
             
             if(this.logined){
                if(this.search_data.length>=1){

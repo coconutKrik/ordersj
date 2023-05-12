@@ -203,8 +203,7 @@ export default {
       document.getElementById("modal").classList.add("hide");
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.axios
-            .put(
+          this.axios.put(
               "/goods/",
               {
                 dishesname: this.dataruleForm.dishesname,
