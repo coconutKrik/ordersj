@@ -95,31 +95,40 @@ export default {
     };
   },
   mounted() {
-    this.shangjianame= document.cookie.match(new RegExp("(^| )" + 'username' + "=([^;]*)(;|$)"))[0];
+    this.shangjianame = document.cookie.match(
+      new RegExp("(^| )" + "username" + "=([^;]*)(;|$)")
+    )[2];
     if (this.shangjianame == "") {
       this.shangjianame = window.sessionStorage.getItem("username");
     }
   },
   methods: {
-    logout(){
-      let url='/shangjialogout';
-      this.axios.delete(url,{
-        shangjianame:this.shangjianame,
-      },{
-        responseType:'json',
-      })
-      .then(res=>{
-        if(res.data.code==0){
-      
-        }else{
-          console.log(res.data.errmsg);
-        }
-      })
-      .catch(err=>{
-        alert('服务器错误');
-        console.log(err);
-      })
-    }
+    logout() {
+      let url = "/shangjialogout";
+      this.axios
+        .delete(
+          url,
+          {
+            shangjianame: this.shangjianame,
+          },
+          {
+            responseType: "json",
+          }
+        )
+        .then((res) => {
+          if (res.data.code == 0) {
+            this.$router.push({
+              path: "/",
+            });
+          } else {
+            console.log(res.data.errmsg);
+          }
+        })
+        .catch((err) => {
+          alert("服务器错误");
+          console.log(err);
+        });
+    },
   },
 };
 </script>
