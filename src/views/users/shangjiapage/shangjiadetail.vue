@@ -88,7 +88,7 @@
         <div class="cart-bottom">
             <span class="cart-bottom-span">已选择<span class="cart-total-num">{{cart_dict.totalnum}}</span>件商品</span>
             <span class="cart-bottom-span">总计：<span class="cart-total-price">{{ cart_dict.totalprice }}</span></span>
-            <span class="cart-bottom-btn" @click="on_submit()">提交订单</span> 
+            <span class="cart-bottom-btn" @click="on_submit()">提交购物车</span> 
 		</div>
     </div>
  </div>
@@ -105,7 +105,7 @@ import userheader from '../userheader.vue';
         return{
             dishes_list:[],
             shangjiainfo:{
-                rate:3.5,
+                rate:1.5,
                 shangjianame:'丁真珍珠',
             },
             cart_dict:{
@@ -173,7 +173,6 @@ import userheader from '../userheader.vue';
             })
             .then(res=>{
                 if(res.data.code==0){
-                    window.sessionStorage.setItem('cart_dict',this.cart_dict);
                     this.$router.push({
                         path:'/cart',
                     })

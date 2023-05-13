@@ -6,6 +6,7 @@ import shangjiarreg from '@/views/shangjia/reg/register.vue'
 import shangjiaindex from '@/views/shangjia/managepage/index.vue'
 import userindex from '@/views/users/userindex/index.vue'
 import shangjiadetail from '@/views/users/shangjiapage/shangjiadetail.vue'
+import cart from '@/views/users/shangjiapage/cart.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -62,6 +63,10 @@ const routes = [
     path:"/shangjiadetail",
     name:"shangjiadetail",
     component:shangjiadetail,
+  },{
+    path:"/cart",
+    name:"cart",
+    component:cart,
   }
 ]
 
