@@ -103,7 +103,7 @@
             })
             .then(res=>{
                 if(res.data.code==0){
-                    this.cart=res.data.cart_list;
+                    this.cart=res.data.cart;
                     for(var i=0; i<this.cart.length; i++){
                         this.cart[i].amount = ((this.cart[i].price) * this.cart[i].count).toFixed(2);
                     }
