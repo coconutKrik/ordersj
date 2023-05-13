@@ -205,12 +205,13 @@ import userheader from '../userheader.vue';
     }
     .footer{
         width: 100%;
-        height: auto;
+        height: 45px;
         bottom: 0%;
         display: block;
         position: fixed;
         border-top:2px solid #fe000074;
 	    margin:30px 0;
+        border-bottom:2px solid #fe000074;
         
     }
     .shangjiainfo{
@@ -255,6 +256,7 @@ import userheader from '../userheader.vue';
         height: 35px;
         float: right;
         text-align: right;
+        
     }
 	.cart-total-num{
         position:relative;
