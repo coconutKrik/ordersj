@@ -132,16 +132,16 @@ import userheader from './../userheader.vue'
     data(){
         return{
             shangjia_list:[],
-            province:{id:1,name:"浙江省"},
-            city:{id:1,name:"杭州市"},
-            district:{id:1,name:"钱塘区"},
+            province:{id:330000,name:"浙江省"},
+            city:{id:330100,name:"杭州市"},
+            district:{id:3301104,name:"钱塘区"},
             provicnes:[],
             cities:[],
             districts:[],
         }
     },
     mounted(){
-        let url="/userindex/shangjiainfo/"
+        let url="/userindex/"+district.id+"/";
         this.axios.get(url,{
             responseType:'json',
         })
@@ -181,6 +181,21 @@ import userheader from './../userheader.vue'
         closeform() {
             document.getElementById("shade").classList.add("hide");
             document.getElementById("modal").classList.add("hide");
+            let url="/userindex/"+district.id+"/";
+            this.axios.get(url,{
+                responseType:'json',
+            })
+            .then(res=>{
+                if(res.data.code==0){
+                    this.shangjia_list=res.data.shangjia_list;
+                }else{
+                    console.log(res.data.errmsg);
+                }
+            })
+            .catch(err=>{
+                alert('服务器错误');
+                console.log(err);
+            });
         },
         loadcity(provinceid,name) {
         this.province.name=name;
@@ -231,6 +246,7 @@ import userheader from './../userheader.vue'
                 path:'/shangjiadetail',
                 query:{
                     shangjiaid:id,
+                    districtid:this.district.id,
                 }
             })
         }

@@ -96,7 +96,21 @@ export default {
   },
   mounted() {
     this.shangjianame = document.cookie.match(new RegExp("(^| )" + "username" + "=([^;]*)(;|$)"))[2];
-    
+    let url="/shangjiainfo/";
+        this.axios.get(url,{
+            responseType:'json',
+        })
+        .then(res=>{
+            if(res.data.code==0){
+                this.rate=res.data.shangjiainfo.rate;
+            }else{
+                console.log(res.data.errmsg);
+            }
+        })
+        .catch(err=>{
+            alert('服务器错误');
+            console.log(err);
+        })
   },
   methods: {
     logout() {

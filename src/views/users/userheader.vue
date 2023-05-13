@@ -141,6 +141,7 @@
          if(document.cookie.match(new RegExp("(^| )" + 'username' + "=([^;]*)(;|$)"))!=undefined){
             this.username=document.cookie.match(new RegExp("(^| )" + 'username' + "=([^;]*)(;|$)"))[2];
             this.logined=true;
+            window.sessionStorage.setItem('logined',this.logined);
          }else{
             this.reg_and_login=true;
             if(pathname=='/search'){

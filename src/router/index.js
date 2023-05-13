@@ -5,6 +5,7 @@ import userreg from '@/views/users/reg/register.vue'
 import shangjiarreg from '@/views/shangjia/reg/register.vue'
 import shangjiaindex from '@/views/shangjia/managepage/index.vue'
 import userindex from '@/views/users/userindex/index.vue'
+import shangjiadetail from '@/views/users/shangjiapage/shangjiadetail.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -57,6 +58,10 @@ const routes = [
     path:"/userindex",
     name:"userindex",
     component:userindex,
+  },{
+    path:"/shangjiadetail",
+    name:"shangjiadetail",
+    component:shangjiadetail,
   }
 ]
 
