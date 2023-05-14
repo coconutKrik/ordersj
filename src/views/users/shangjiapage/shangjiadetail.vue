@@ -170,6 +170,7 @@ export default {
         this.cart_dict.i.count += 1;
       } else {
         var dishes = Object;
+        dishes.shangjiaid = this.shangjiaid,
         dishes.dishes_id = this.dishes_list[i].dishes_id;
         dishes.dishesname = this.dishes_list[i].dishesname;
         dishes.price = this.dishes_list[i].price;
@@ -205,6 +206,7 @@ export default {
         )
         .then((res) => {
           if (res.data.code == 0) {
+
             this.$router.push({
               path: "/cart",
             });
@@ -323,4 +325,5 @@ export default {
   text-align: center;
   margin-top: 10px;
 }
+
 </style>

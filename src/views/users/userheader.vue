@@ -78,26 +78,6 @@
           <a href="/cart" target="_self" style="display: inline-flex"
             ><div>购物车</div></a
           >
-          <!-- <ul class="cartshow hide" id="cartshow">
-               <li>
-                  <span class="dishespic" style="width: 50px;">菜品图片</span>
-                  <span>菜品名称</span>
-                  <span>菜品单价</span>
-                  <span>数量</span>
-               </li>
-               <li v-for="(dishes,i) in cart" :key="i">
-                  <span class="dishespic">
-                     <el-image
-                     style="width: 50px; height: 50px"
-                     :src="dishes.picurl"
-                     fit="cover"
-                     ></el-image>
-                  </span>
-                  <span>{{ dishes.dishesname }}</span>
-                  <span>{{ dishes.dishesprice }}</span>
-                  <span>{{ dishes.dishescount }}</span>
-               </li>
-             </ul> -->
         </el-menu-item>
       </div>
     </el-menu>
@@ -148,7 +128,7 @@ export default {
         });
     },
     search_dishes() {
-      if (this.logined) {
+    
         if (this.search_data.length >= 1) {
           window.sessionStorage.setItem("q", this.search_data);
           this.$router.push({
@@ -161,9 +141,7 @@ export default {
         } else {
           alert("暂不支持无关键字搜索，请输入关键字");
         }
-      } else {
-        alert("登录后方可搜索");
-      }
+      
     },
   },
   created() {
@@ -180,12 +158,18 @@ export default {
       window.sessionStorage.setItem("logined", this.logined);
     } else {
       this.reg_and_login = true;
-      if (pathname == "/search") {
-        alert("登录后可使用搜索功能");
-        this.$router.push({
-          path: "/login",
-        });
-      }
+      // if (pathname == "/search") {
+      //   alert("登录后可使用搜索功能");
+      //   this.$router.push({
+      //     path: "/",
+      //   });
+      // }
+      // if (pathname == "/usercenter") {
+      //   alert("登录后可进入用户中心");
+      //   this.$router.push({
+      //     path: "/",
+      //   });
+      // }
     }
   },
 };
@@ -221,19 +205,6 @@ a {
   display: inline-flex;
   float: right;
   width: 8%;
-  // .cartshow{
-  //    list-style: none;
-  //    margin-left: -80%;
-  //    padding-right: 30%;
-  //    position: absolute;
-  //    height: auto;
-  //    background-color: rgb(255, 212, 212);
-
-  //    span{
-  //       padding: 5px;
-  //    }
-
-  // }
 }
 /deep/.el-input__inner {
   border: 1px solid #737377;

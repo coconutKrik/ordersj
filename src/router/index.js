@@ -7,6 +7,12 @@ import shangjiaindex from '@/views/shangjia/managepage/index.vue'
 import userindex from '@/views/users/userindex/index.vue'
 import shangjiadetail from '@/views/users/shangjiapage/shangjiadetail.vue'
 import cart from '@/views/users/shangjiapage/cart.vue'
+import ordersubmit from '@/views/users/shangjiapage/ordersubmit.vue'
+import ordersuccess from '@/views/users/shangjiapage/ordersuccess.vue'
+import orders from '@/views/users/info/orders.vue'
+import usercenter from '@/views/users/info/usercenter.vue'
+import search from '@/views/users/shangjiapage/search.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -67,6 +73,26 @@ const routes = [
     path:"/cart",
     name:"cart",
     component:cart,
+  },{
+    path:"/ordersubmit",
+    name:"ordersubmit",
+    component:ordersubmit,
+  },{
+    path:"/ordersuccess",
+    name:"ordersuccess",
+    component:ordersuccess,
+  },{
+    path:"/orders",
+    name:"orders",
+    component:orders,
+  },{
+    path:"/usercenter",
+    name:"usercenter",
+    component:usercenter,
+  },{
+    path:"/search",
+    name:"search",
+    component:search,
   }
 ]
 

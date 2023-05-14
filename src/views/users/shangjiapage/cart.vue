@@ -25,10 +25,11 @@
             @change="update_selected(i)"
           />
         </li>
-        <li class="col02"><img :src="dishes.picurl" /></li>
+        <li class="col02"><el-image :src="dishes.picurl" fit="fill"></el-image></li>
         <li class="col03">{{ dishes.dishesname }}</li>
-        <li class="col33">{{ dishes.taste }}</li>
+       
         <li class="col05">{{ dishes.price }}元</li>
+        <li class="col33">{{ dishes.taste }}</li>
         <li class="col06">
           <div class="num_add">
             <a @click="on_add(i)" class="add fl">+</a>
@@ -61,7 +62,7 @@
           ><br />共计<b>{{ total_selected_count }}</b
           >件菜品
         </li>
-        <li class="col04"><a href="/order">去结算</a></li>
+        <li class="col04"><a href="/ordersubmit">去结算</a></li>
       </ul>
     </div>
     <div class="footer">
@@ -83,7 +84,7 @@
 <script>
 import userheader from "../userheader.vue";
 export default {
-  name: "shangjiadetail",
+  name: "cart",
   components: {
     userheader: userheader,
   },
@@ -327,7 +328,7 @@ export default {
   text-align: center;
 }
 .cart_list_th .col01 {
-  width: 36%;
+  width: 20%;
 }
 .cart_list_th .col02 {
   width: 6%;
@@ -342,10 +343,10 @@ export default {
   width: 12%;
 }
 .cart_list_th .col05 {
-  width: 15%;
+  width: 12%;
 }
 .cart_list_th .col06 {
-  width: 18%;
+  width: 15%;
 }
 
 .cart_list_td {
@@ -378,16 +379,19 @@ export default {
   width: 6%;
 }
 .cart_list_td .col05 {
-  width: 13%;
+  width: 12%;
 }
 .cart_list_td .col06 {
   width: 12%;
 }
+.cart_list_td.col33{
+  width: 10%;
+}
 .cart_list_td .col07 {
-  width: 15%;
+  width: 12%;
 }
 .cart_list_td .col08 {
-  width: 18%;
+  width: 15%;
 }
 
 .cart_list_td .col02 img {
@@ -455,7 +459,7 @@ export default {
   width: 12%;
 }
 .settlements .col03 {
-  width: 69%;
+  width: 29%;
   height: 48px;
   line-height: 28px;
   text-align: right;
@@ -486,8 +490,9 @@ export default {
 }
 .settlements .col04 a {
   display: block;
+  border-radius: 6px;
   height: 78px;
-  background-color: #fe8502;
+  background-color: rgb(72, 240, 223);
   text-align: center;
   line-height: 78px;
   color: #fff;

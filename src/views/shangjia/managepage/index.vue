@@ -24,10 +24,9 @@
           >
         </el-submenu>
         <el-submenu index="2">
-          <template slot="title"
-            ><i class="el-icon-s-order"></i>订单管理</template
-          >
-          <el-menu-item index="2-1">订单浏览</el-menu-item>
+          <template slot="title"><i class="el-icon-s-order"></i>订单管理</template>
+          <el-menu-item index="2-1"><a href="/shangjiaindex/ordershow"
+              ><span>订单浏览</span></a></el-menu-item>
         </el-submenu>
       </el-menu>
     </el-aside>
